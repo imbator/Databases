@@ -1,4 +1,4 @@
-QT       += core gui
+QT += core gui
 QT += sql
 QT += core
 LIBS += -LE:/Qt/6.4.3/mingw_64/plugins/sqldrivers -lqsqlpsql
@@ -19,6 +19,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    configuratedatabase.h \
     databaseinterface.h \
     databaseservice.h \
     mainwindow.h

@@ -6,8 +6,7 @@
 #include <QSqlTableModel>
 #include <QString>
 #include <QFileDialog>
-#include <databaseservice.h>
-
+#include "databaseservice.h"
 
 namespace Ui {
 class DatabaseInterface;
@@ -28,8 +27,7 @@ private slots:
 
 private:
     Ui::DatabaseInterface *ui;
-    std::unique_ptr<DatabaseService> database_unit;
-    QSqlTableModel* q_sql_table;
+    std::unique_ptr<DatabaseService> database_unit_;
 };
 
 #endif // DATABASEINTERFACE_H

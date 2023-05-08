@@ -7,21 +7,23 @@ DatabaseInterface::DatabaseInterface(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    database_unit = std::make_unique<DatabaseService>();
-    database_unit->databaseConnect();
+    database_unit_ = std::make_unique<DatabaseService>();
 
-    if (database_unit->getConnectionStatus()) {
+    database_unit_->databaseConnect();
+
+    if (database_unit_->getConnectionStatus()) {
         ui->logBrowser->append("Connected to database sucessfully!");
     } else {
         ui->logBrowser->append("Failed connection to database! Please, check logs in console for more info.");
     }
 
-    connect(database_unit.get(), &DatabaseService::log, ui->logBrowser, &QTextBrowser::append);
+    connect(database_unit_.get(), &DatabaseService::log, ui->logBrowser, &QTextBrowser::append);
     connect(ui->clear, &QPushButton::clicked, ui->logBrowser, &QTextBrowser::clear);
     connect(ui->configuration, &QPushButton::clicked, this, &DatabaseInterface::loadQuery);
     connect(ui->recreate, &QPushButton::clicked, this, &DatabaseInterface::recreateDatabase);
-    connect(database_unit.get(), &DatabaseService::update, this, &DatabaseInterface::updateDatabaseInterface);
+    connect(database_unit_.get(), &DatabaseService::update, this, &DatabaseInterface::updateDatabaseInterface);
 
+    // TODO: добавить в интерфейс кнопки добавления / удаления записей в таблицу
 }
 
 DatabaseInterface::~DatabaseInterface()
@@ -35,18 +37,20 @@ void DatabaseInterface::loadQuery()
     QString fileName = QFileDialog::getOpenFileName(this,
                             tr("Open SQL File"), "",
                             tr("SQL Files (*.sql);;All Files (*)"));
-    database_unit->makeQuery(QFile(fileName));
+    database_unit_->makeQuery(QFile(fileName));
     // Загрузка sql запроса из файла
 }
 
 void DatabaseInterface::recreateDatabase()
 {
-    database_unit->databaseCreate();
+    database_unit_->databaseCreate();
 }
 
 void DatabaseInterface::updateDatabaseInterface()
 {
-    QSqlTableModel *model = new QSqlTableModel(this, database_unit->getDatabase());
+    // TODO: добавить выбор, какую таблицу отображать
+
+    QSqlTableModel *model = new QSqlTableModel(this, database_unit_->getDatabase());
     model->setTable("Студент");
 
     // Установка модели для отображения в таблице

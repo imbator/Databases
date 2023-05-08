@@ -1,13 +1,5 @@
 #include "databaseservice.h"
 
-DatabaseService::DatabaseService()
-{
-    table_name = "students";
-    user_name = "admin";
-    password = "12345";
-    host_name = "192.168.56.101";
-}
-
 void DatabaseService::databaseConnect()
 {
     // TODO: перенести инициализацию всех параметров базы данных в скрипт
@@ -16,7 +8,7 @@ void DatabaseService::databaseConnect()
     db = QSqlDatabase::addDatabase("QPSQL");
     db.setHostName(host_name); // IP-адрес вашей виртуальной машины Ubuntu (см. на виртуалке)
     db.setPort(5432); // порт по умолчанию для PostgreSQL
-    db.setDatabaseName(table_name); // имя вашей базы данных (см. на виртуалке)
+    db.setDatabaseName(database_name); // имя вашей базы данных (см. на виртуалке)
     db.setUserName(user_name); // ваше имя пользователя для базы данных (см. на виртуалке)
     db.setPassword(password); // ваш пароль для базы данных (см. на виртуалке)
     db.setConnectOptions("client_encoding=UTF8");
@@ -34,6 +26,7 @@ void DatabaseService::databaseConnect()
 
 void DatabaseService::databaseCreate()
 {
+    // TODO: выпилить или зарефакторить
     // Закрыть все соединения с базой данных
     db.close();
 

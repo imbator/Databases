@@ -8,6 +8,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QDebug>
+#include <configuratedatabase.h>
 
 
 class DatabaseService : public QObject
@@ -15,7 +16,12 @@ class DatabaseService : public QObject
     Q_OBJECT
     // Database backend
 public:
-    DatabaseService();
+    DatabaseService() {
+        this->database_name = DATABASE_NAME;
+        this->user_name = USER_NAME;
+        this->password = PASSWORD;
+        this->host_name = HOST_NAME;
+    }
     void databaseConnect();
     void databaseCreate();
     void makeQuery(QFile file);
@@ -31,7 +37,7 @@ signals:
 private:
     QSqlDatabase db;
 
-    QString table_name;
+    QString database_name;
     QString user_name;
     QString password;
     QString host_name;
