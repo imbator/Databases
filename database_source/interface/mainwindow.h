@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QStyleFactory>
-#include <databaseinterface.h>
 
 
 QT_BEGIN_NAMESPACE

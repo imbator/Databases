@@ -8,7 +8,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QDebug>
-#include <configuratedatabase.h>
+#include "config/configuratedatabase.h"
 
 
 class DatabaseService : public QObject

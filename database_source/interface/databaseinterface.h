@@ -6,7 +6,7 @@
 #include <QSqlTableModel>
 #include <QString>
 #include <QFileDialog>
-#include "databaseservice.h"
+#include "service/databaseservice.h"
 
 namespace Ui {
 class DatabaseInterface;
