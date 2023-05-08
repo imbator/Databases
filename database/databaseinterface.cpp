@@ -20,6 +20,7 @@ DatabaseInterface::DatabaseInterface(QWidget *parent) :
     connect(ui->clear, &QPushButton::clicked, ui->logBrowser, &QTextBrowser::clear);
     connect(ui->configuration, &QPushButton::clicked, this, &DatabaseInterface::loadQuery);
     connect(ui->recreate, &QPushButton::clicked, this, &DatabaseInterface::recreateDatabase);
+    connect(database_unit.get(), &DatabaseService::update, this, &DatabaseInterface::updateDatabaseInterface);
 
 }
 
@@ -41,5 +42,17 @@ void DatabaseInterface::loadQuery()
 void DatabaseInterface::recreateDatabase()
 {
     database_unit->databaseCreate();
+}
+
+void DatabaseInterface::updateDatabaseInterface()
+{
+    QSqlTableModel *model = new QSqlTableModel(this, database_unit->getDatabase());
+    model->setTable("Студент");
+
+    // Установка модели для отображения в таблице
+    ui->students_table->setModel(model);
+
+    // Получение данных из базы данных
+    model->select();
 }
 

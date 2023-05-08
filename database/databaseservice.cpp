@@ -88,6 +88,7 @@ void DatabaseService::makeQuery(QFile file)
         message = "Query in file " + file.fileName() + " executed sucesfully!";
 
     emit log(message);
+    emit update();
 }
 
 bool DatabaseService::getConnectionStatus()

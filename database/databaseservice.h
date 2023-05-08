@@ -26,6 +26,7 @@ public:
 
 signals:
     void log(QString&);
+    void update();
 
 private:
     QSqlDatabase db;

@@ -24,6 +24,7 @@ public:
 private slots:
     void loadQuery();
     void recreateDatabase();
+    void updateDatabaseInterface();
 
 private:
     Ui::DatabaseInterface *ui;
